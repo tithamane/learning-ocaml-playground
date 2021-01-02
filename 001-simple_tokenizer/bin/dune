@@ -1,0 +1,3 @@
+(executable
+    (name tokenizer)
+    (libraries core lib))
