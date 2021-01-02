@@ -1,2 +1,4 @@
 add 2 3
 sub 4 2
+mul 3 4
+div 8 2

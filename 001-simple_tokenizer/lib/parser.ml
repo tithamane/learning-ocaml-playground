@@ -11,7 +11,7 @@ type token = {
 let build_token acc =
     (* TODO: Check that "acc" has a value and return and optional *)
     match acc with
-    "add" | "sub" -> {identifier = INSTRUCTION; value = acc}
+    "add" | "sub" | "mul" | "div" -> {identifier = INSTRUCTION; value = acc}
     | _ ->  {identifier = VALUE; value = acc}
 
 let check_acc tokens acc =
