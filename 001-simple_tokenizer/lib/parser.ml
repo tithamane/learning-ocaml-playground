@@ -1,6 +1,7 @@
 open Core
 
-type statement = | INSTRUCTION | VALUE
+type statement = INSTRUCTION | VALUE
+[@@deriving show]
 
 type token = {
     identifier: statement;
@@ -19,17 +20,19 @@ let check_acc tokens acc =
     tokens @ [t]
 
 let rec next_char tokens acc code code_index max_code_index =
-    if code_index == max_code_index then
+    if code_index = max_code_index then
         (* TODO: Check if "acc" and handle Optional. *)
         check_acc tokens acc
     else
         match code.[code_index] with
         | ' ' | '\n' -> 
             let new_tokens = (check_acc tokens acc) in
-            next_char new_tokens acc code (code_index + 1) max_code_index
+            next_char new_tokens "" code (code_index + 1) max_code_index
         | _ -> 
-            let new_code = String.concat "" [acc; (Char.to_string code.[code_index])] in
-            next_char tokens acc code (code_index + 1) max_code_index
+            (* let new_code = String.concat "" [acc; (Char.to_string code.[code_index])] in *)
+
+            let new_acc = acc ^ String.make 1 code.[code_index] in (* What on earth is happening here?*)
+            next_char tokens new_acc code (code_index + 1) max_code_index
 
 let parse (code: string) =
     next_char [] "" code 0 (String.length code)
