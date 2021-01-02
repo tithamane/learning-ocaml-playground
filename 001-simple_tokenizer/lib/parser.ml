@@ -11,8 +11,7 @@ type token = {
 let build_token acc =
     (* TODO: Check that "acc" has a value and return and optional *)
     match acc with
-    "add" -> {identifier = INSTRUCTION; value = acc}
-    | "sub" -> {identifier = INSTRUCTION; value = acc}
+    "add" | "sub" -> {identifier = INSTRUCTION; value = acc}
     | _ ->  {identifier = VALUE; value = acc}
 
 let check_acc tokens acc =
@@ -29,7 +28,6 @@ let rec next_char tokens acc code code_index max_code_index =
             let new_tokens = (check_acc tokens acc) in
             next_char new_tokens "" code (code_index + 1) max_code_index
         | _ -> 
-            (* let new_code = String.concat "" [acc; (Char.to_string code.[code_index])] in *)
 
             let new_acc = acc ^ String.make 1 code.[code_index] in (* What on earth is happening here?*)
             next_char tokens new_acc code (code_index + 1) max_code_index
