@@ -13,7 +13,6 @@ The resulting list will is the reverse of what it initially received.
 let rec _string_to_int_converter (values: string list) (acc: int list) =
   match values with
   [] -> acc
-  | [a] -> (int_of_string a) :: acc
   | hd::tl ->
     let new_acc = (int_of_string hd) :: acc  in
     _string_to_int_converter tl new_acc
