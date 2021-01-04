@@ -38,7 +38,7 @@ let print_list (items: int list) =
 
 
 let () =
-  let contents = get_fixture_contents "10" in
+  let contents = get_fixture_contents "100" in
   let contents_as_list = Str.split (Str.regexp "\n") contents in
   let values = convert_to_ints contents_as_list in
   print_list values
