@@ -1,0 +1,3 @@
+(executable
+ (name algos)
+ (libraries core str lib))
