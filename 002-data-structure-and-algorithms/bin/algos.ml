@@ -36,9 +36,22 @@ let print_list (items: int list) =
   let content = _print_list "" items in
   Printf.printf "%s\n" (Printf.sprintf "[%s ]" content)
 
+  (** Print list of items if they are  100 or less*)
+let maybe_print_list (items: int list) =
+  if List.length items > 100 then () else print_list items
+
 
 let () =
-  let contents = get_fixture_contents "100" in
+  (* Note: Purposefully not handling the case where file does not exist.*)
+  let () = Printf.printf "Fixture Number(without .txt): " in
+
+  (* Force ocaml to print out the message above in case it has not.*)
+  let () = Out_channel.flush(Out_channel.stdout) in
+
+  let file_number = In_channel.input_line_exn(In_channel.stdin) in
+  let contents = get_fixture_contents file_number in
   let contents_as_list = Str.split (Str.regexp "\n") contents in
   let values = convert_to_ints contents_as_list in
-  print_list values
+  let () = maybe_print_list values in
+  (* print_list values *)
+  Printf.printf "Length: %d\n" (List.length values)
